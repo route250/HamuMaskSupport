@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>はむマスク for Google Chrome プライバシーポリシー</title>
+  <meta name="description" content="はむマスク for Google Chrome のプライバシーポリシーです。参照する情報、利用目的、外部送信の有無を説明します。">
+  <style>
+    :root {
+      color-scheme: light;
+      --text: #1d1d1f;
+      --muted: #5f6368;
+      --line: #d9dde3;
+      --bg: #ffffff;
+      --band: #f6f8fa;
+      --accent: #1769aa;
+      --accent-dark: #0f4f84;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 0.08em;
+      text-underline-offset: 0.18em;
+    }
+
+    a:hover {
+      color: var(--accent-dark);
+    }
+
+    header {
+      border-bottom: 1px solid var(--line);
+      background: var(--band);
+    }
+
+    main,
+    .header-inner {
+      width: min(920px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .header-inner {
+      padding: 42px 0 32px;
+    }
+
+    main {
+      padding: 34px 0 56px;
+    }
+
+    h1,
+    h2 {
+      line-height: 1.3;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 5vw, 2.8rem);
+    }
+
+    h2 {
+      margin: 0 0 16px;
+      font-size: 1.35rem;
+    }
+
+    p {
+      margin: 0 0 14px;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 1.4rem;
+    }
+
+    li + li {
+      margin-top: 6px;
+    }
+
+    section {
+      padding: 26px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    section:last-child {
+      border-bottom: 0;
+    }
+
+    .lead,
+    .meta {
+      color: var(--muted);
+    }
+
+    .lead {
+      max-width: 720px;
+      margin: 0;
+      font-size: 1.08rem;
+    }
+
+    .meta {
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <h1>はむマスク for Google Chrome プライバシーポリシー</h1>
+      <p class="lead">このページでは、はむマスク for Google Chrome が参照する情報、利用目的、外部送信の有無を説明します。</p>
+    </div>
+  </header>
+
+  <main>
+    <section aria-labelledby="about">
+      <h2 id="about">対象</h2>
+      <p>はむマスク for Google Chrome は、Webページ上の広告候補要素を検出し、半透明のオーバーレイで視覚的にマスクするChrome拡張です。</p>
+    </section>
+
+    <section aria-labelledby="referenced-data">
+      <h2 id="referenced-data">取得・参照する情報</h2>
+      <p>この拡張は、広告候補を判定するために、ユーザーが閲覧中のWebページについて以下の情報をブラウザ内で参照します。</p>
+      <ul>
+        <li>DOM構造</li>
+        <li>要素のタグ名、id、class、属性</li>
+        <li>href、src、styleなどに含まれるURL</li>
+        <li>iframe情報</li>
+        <li>要素の表示サイズ、表示位置、表示状態</li>
+        <li>広告候補判定の内部状態</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="purpose">
+      <h2 id="purpose">利用目的</h2>
+      <p>参照した情報は、Webページ上の広告候補要素を検出し、マスクを表示するためだけに利用します。</p>
+    </section>
+
+    <section aria-labelledby="external-transfer">
+      <h2 id="external-transfer">外部送信</h2>
+      <p>この拡張は、閲覧ページの内容、URL、個人情報、閲覧履歴、広告候補の判定結果を外部サーバーへ送信しません。</p>
+      <p>広告候補の判定処理はブラウザ内で完結します。</p>
+    </section>
+
+    <section aria-labelledby="storage">
+      <h2 id="storage">保存する情報</h2>
+      <p>現状の実装では、閲覧ページの情報や個人情報を永続保存しません。</p>
+      <p>今後、マスク解除設定などを保存する機能を追加する場合は、保存対象、保存目的、保存場所をこのポリシーに追記します。</p>
+    </section>
+
+    <section aria-labelledby="third-party">
+      <h2 id="third-party">第三者提供</h2>
+      <p>この拡張は、参照した情報を第三者へ提供しません。</p>
+    </section>
+
+    <section aria-labelledby="remote-code">
+      <h2 id="remote-code">リモートコード</h2>
+      <p>この拡張は、外部サーバーから取得したJavaScriptコードを実行しません。</p>
+    </section>
+
+    <section aria-labelledby="contact">
+      <h2 id="contact">問い合わせ</h2>
+      <p>不具合、誤検出、マスクされない広告候補がある場合は、GitHub Issuesで報告してください。</p>
+      <p><a href="https://github.com/route250/HamuMask-GoogleChrome/issues">GitHub Issuesを開く</a></p>
+      <p><a href="../">サポートページへ戻る</a></p>
+    </section>
+
+    <section aria-labelledby="changes">
+      <h2 id="changes">変更</h2>
+      <p>このポリシーを変更する場合は、このページ、開発リポジトリ、またはChrome Web Store掲載情報で内容を更新します。</p>
+      <p class="meta">公開URL: https://route250.github.io/HamuMaskSupport/googlechrome/privacy/</p>
+    </section>
+  </main>
+</body>
+</html>
