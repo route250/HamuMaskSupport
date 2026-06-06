@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>はむマスク - iOS Safari広告マスク拡張機能</title>
+  <meta name="description" content="はむマスクは、iOS Safariに表示される広告候補の枠を、かわいいハムスター画像で視覚的にマスクするSafari拡張機能です。">
+  <link rel="icon" href="./assets/hamu-icon-64.png">
+  <style>
+    :root {
+      color-scheme: light;
+      --text: #2a1f1a;
+      --muted: #6f625c;
+      --line: #eadfd5;
+      --bg: #fffdf9;
+      --band: #fff5e8;
+      --surface: #ffffff;
+      --accent: #f08a24;
+      --accent-dark: #bf6515;
+      --support: #176b72;
+      --support-dark: #10535a;
+      --shadow: 0 18px 50px rgba(125, 79, 28, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    a {
+      color: var(--support);
+      text-decoration-thickness: 0.08em;
+      text-underline-offset: 0.18em;
+    }
+
+    a:hover {
+      color: var(--support-dark);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(234, 223, 213, 0.82);
+      background: rgba(255, 253, 249, 0.92);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      width: min(1120px, calc(100% - 32px));
+      min-height: 68px;
+      margin: 0 auto;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .brand img {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-dark);
+    }
+
+    main {
+      overflow: hidden;
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at 18% 12%, rgba(240, 138, 36, 0.16), transparent 30%),
+        linear-gradient(180deg, #fffaf1 0%, #fffdf9 74%);
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 480px);
+      align-items: center;
+      gap: 54px;
+      width: min(1120px, calc(100% - 32px));
+      min-height: calc(100svh - 68px);
+      margin: 0 auto;
+      padding: 58px 0 46px;
+    }
+
+    .title-art {
+      width: min(480px, 100%);
+      margin-bottom: 24px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin-bottom: 16px;
+      font-size: clamp(2.35rem, 7vw, 4.9rem);
+    }
+
+    h2 {
+      font-size: clamp(1.7rem, 4vw, 2.7rem);
+    }
+
+    h3 {
+      font-size: 1.18rem;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .lead {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: clamp(1.08rem, 2.2vw, 1.35rem);
+      line-height: 1.8;
+    }
+
+    .hero-actions,
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 11px 18px;
+      border: 1px solid var(--support);
+      border-radius: 8px;
+      background: var(--support);
+      color: #ffffff;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .button:hover {
+      border-color: var(--support-dark);
+      background: var(--support-dark);
+      color: #ffffff;
+    }
+
+    .button.secondary {
+      border-color: var(--line);
+      background: var(--surface);
+      color: var(--support);
+    }
+
+    .button.secondary:hover {
+      border-color: var(--support);
+      background: #f7fffd;
+      color: var(--support-dark);
+    }
+
+    .hero-visual {
+      position: relative;
+      justify-self: center;
+      width: min(430px, 100%);
+    }
+
+    .hero-visual img {
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .section {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 72px 0;
+    }
+
+    .section + .section {
+      border-top: 1px solid var(--line);
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 34px;
+    }
+
+    .section-head p {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 1.06rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .feature {
+      min-height: 100%;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+
+    .feature img {
+      width: 70px;
+      height: 70px;
+      margin-bottom: 16px;
+      object-fit: contain;
+    }
+
+    .feature p {
+      margin-top: 8px;
+      color: var(--muted);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+      align-items: center;
+      gap: 42px;
+    }
+
+    .split.reverse {
+      grid-template-columns: minmax(280px, 420px) minmax(0, 1fr);
+    }
+
+    .visual-card {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .visual-card img {
+      border-radius: 8px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .step {
+      padding: 18px;
+      border-radius: 8px;
+      background: var(--band);
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      margin-bottom: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 800;
+    }
+
+    .note {
+      padding: 20px 22px;
+      border-left: 5px solid var(--support);
+      border-radius: 8px;
+      background: #eefafa;
+    }
+
+    .footer {
+      background: #33231a;
+      color: #fff8ef;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 36px 0;
+    }
+
+    .footer a {
+      color: #ffffff;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 820px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        min-height: auto;
+        padding: 12px 0;
+      }
+
+      .nav-links {
+        gap: 14px;
+        overflow-x: auto;
+        width: 100%;
+        padding-bottom: 2px;
+        white-space: nowrap;
+      }
+
+      .hero-inner,
+      .split,
+      .split.reverse {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-inner {
+        min-height: auto;
+        padding-top: 42px;
+      }
+
+      .hero-visual {
+        width: min(360px, 100%);
+      }
+
+      .feature-grid,
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 52px 0;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="メインナビゲーション">
+      <a class="brand" href="./">
+        <img src="./assets/hamu-icon-64.png" alt="" width="64" height="64">
+        <span>はむマスク</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">機能</a>
+        <a href="#setup">使い方</a>
+        <a href="#privacy">プライバシー</a>
+        <a href="./support/">サポート</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <div>
+          <img class="title-art" src="./assets/hamu-title.png" alt="はむマスク" width="1203" height="297">
+          <!-- <h1 id="hero-title">はむマスク</h1> -->
+          <p class="lead">Safariの広告枠を、かわいいハムスターでマスク。IPhoneのSafariで広告を検出し視覚的に隠します。</p>
+          <div class="hero-actions">
+            <a class="button" href="./support/">サポートを見る</a>
+            <a class="button secondary" href="./support/#privacy">プライバシー</a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <img src="./assets/image100.png" alt="" width="1242" height="2688">
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="section" aria-labelledby="features-title">
+      <div class="section-head">
+        <h2 id="features-title">広告候補をやさしく見えなくする</h2>
+        <p>はむマスクは通信を遮断する広告ブロッカーではありません。Safariに表示された広告候補の領域に、ハムスター画像のマスクを重ねます。</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature">
+          <img src="./assets/hamster101.png" alt="" width="298" height="298">
+          <h3>ページ内で判定</h3>
+          <p>DOM要素、iframe、リンクURL、属性、表示サイズなどを使って広告候補を検出します。</p>
+        </article>
+        <article class="feature">
+          <img src="./assets/hamster102.png" alt="" width="281" height="281">
+          <h3>ハムスターでマスク</h3>
+          <p>検出した広告候補領域を、ページの内容を読みやすく保つ半透明のマスクで覆います。</p>
+        </article>
+        <article class="feature">
+          <img src="./assets/hamster103.png" alt="" width="273" height="273">
+          <h3>必要なときは解除</h3>
+          <p>誤検出や確認したい広告がある場合は、マスクのメニューから解除できます。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="setup" class="section split" aria-labelledby="setup-title">
+      <div>
+        <h2 id="setup-title">Safariの設定をしてください。</h2>
+        <p class="lead">iOSの仕様上、アプリをインストールしただけではSafari側で自動有効化されません。設定アプリからSafari拡張機能を許可してください。</p>
+        <div class="steps">
+          <div class="step">
+            <span class="step-number">1</span>
+            <h3>設定を開く</h3>
+            <p>iPhoneの設定から、アプリ、Safari、機能拡張へ進みます。</p>
+          </div>
+          <div class="step">
+            <span class="step-number">2</span>
+            <h3>はむマスクを許可</h3>
+            <p>はむマスクの設定で「拡張機能を許可」をオンにします。</p>
+          </div>
+          <div class="step">
+            <span class="step-number">3</span>
+            <h3>Webサイトを許可</h3>
+            <p>アクセス権設定で「すべてのWebサイト」を「許可」にします。</p>
+          </div>
+        </div>
+        <div class="button-row">
+          <a class="button secondary" href="./support/#setup">詳しい設定手順を見る</a>
+        </div>
+      </div>
+      <div class="visual-card">
+        <img src="./assets/image101.png" alt="はむマスクが広告候補を検出してハムスター画像でマスクする説明画像" width="1242" height="2688">
+      </div>
+    </section>
+
+    <section class="section split reverse" aria-labelledby="unmask-title">
+      <div class="visual-card">
+        <img src="./assets/image103.png" alt="タップしたい広告はマスクを解除して確認できる説明画像" width="1242" height="2688">
+      </div>
+      <div>
+        <h2 id="unmask-title">誤検出でも戻せる</h2>
+        <p class="lead">広告ではない領域がマスクされた場合や、内容を確認したい場合は、マスクの操作メニューから解除できます。</p>
+        <div class="note">
+          <p>はむマスクは汎用的な広告候補検出を目指していますが、すべての広告を完全にマスクできるとは限りません。見つけた問題はサポートページから報告できます。</p>
+        </div>
+        <div class="button-row">
+          <a class="button" href="./support/#report">不具合を報告する</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="privacy" class="section" aria-labelledby="privacy-title">
+      <div class="section-head">
+        <h2 id="privacy-title">ブラウザ処理で安心設計</h2>
+        <p>閲覧ページの内容、URL、個人情報、閲覧履歴、広告候補の判定結果を外部サーバーへ送信しません。広告候補の判定処理はブラウザ内で完結します。</p>
+      </div>
+      <div class="button-row">
+        <a class="button secondary" href="./support/#privacy">プライバシーの詳細を見る</a>
+        <a class="button" href="./support/">サポートページへ</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>はむマスク for iOS Safari</p>
+      <p><a href="./support/">サポート</a></p>
+    </div>
+  </footer>
+</body>
+</html>
