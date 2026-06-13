@@ -42,7 +42,7 @@
     </nav>
     <div class="nav hero">
       <div>
-        <img class="title-art" src="../../assets/hamu-title-256.png" alt="はむマスク" data-ja-alt="はむマスク" data-en-alt="Hamu Mask" width="600" height="148">
+        <img class="title-art" src="../../assets/hamu-title-ja-1203x297.png" data-ja-src="../../assets/hamu-title-ja-1203x297.png" data-en-src="../../assets/hamu-title-en-800x198.png" data-ja-width="1203" data-en-width="800" data-ja-height="297" data-en-height="198" alt="はむマスク" data-ja-alt="はむマスク" data-en-alt="Hamu Mask" width="1203" height="297">
         <h1 data-ja="はむマスク サポート" data-en="Hamu Mask Support">はむマスク サポート</h1>
         <p class="lead" data-ja="iOS Safari拡張機能「はむマスク」の設定方法、困ったときの確認事項、不具合報告方法をまとめています。" data-en="Setup instructions, troubleshooting tips, and issue reporting information for the Hamu Mask extension for iOS Safari.">iOS Safari拡張機能「はむマスク」の設定方法、困ったときの確認事項、不具合報告方法をまとめています。</p>
       </div>
@@ -258,6 +258,13 @@
             const dataKey = selected + attribute.split('-').map((part) => part[0].toUpperCase() + part.slice(1)).join('');
             element.setAttribute(attribute, element.dataset[dataKey]);
           });
+        });
+        document.querySelectorAll('[data-ja-src][data-en-src]').forEach((image) => {
+          image.src = image.dataset[selected + 'Src'];
+          const width = image.dataset[selected + 'Width'];
+          const height = image.dataset[selected + 'Height'];
+          if (width) image.width = Number(width);
+          if (height) image.height = Number(height);
         });
         document.querySelectorAll('[data-language]').forEach((button) => {
           button.setAttribute('aria-pressed', String(button.dataset.language === selected));
