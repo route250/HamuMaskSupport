@@ -6,383 +6,45 @@
   <title>はむマスク サポート</title>
   <meta name="description" content="はむマスク for iOS Safari のサポートページです。設定手順、よくあるトラブル、プライバシー、不具合報告方法を掲載しています。">
   <link rel="icon" href="../assets/hamu-icon-64.png">
-  <style>
-    :root {
-      color-scheme: light;
-      --text: #2a1f1a;
-      --muted: #6f625c;
-      --line: #eadfd5;
-      --bg: #fffdf9;
-      --band: #fff5e8;
-      --surface: #ffffff;
-      --accent: #f08a24;
-      --accent-dark: #bf6515;
-      --support: #176b72;
-      --support-dark: #10535a;
-      --shadow: 0 14px 40px rgba(125, 79, 28, 0.13);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      overflow-x: hidden;
-      background: var(--bg);
-      color: var(--text);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      font-size: 16px;
-      line-height: 1.75;
-    }
-
-    img {
-      display: block;
-      max-width: 100%;
-      height: auto;
-    }
-
-    a {
-      color: var(--support);
-      text-decoration-thickness: 0.08em;
-      text-underline-offset: 0.18em;
-    }
-
-    a:hover {
-      color: var(--support-dark);
-    }
-
-    .site-header {
-      border-bottom: 1px solid var(--line);
-      background: linear-gradient(180deg, #fffaf1 0%, #fffdf9 100%);
-    }
-
-    .nav,
-    main {
-      width: min(980px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      min-height: 68px;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 800;
-    }
-
-    .brand img {
-      width: 42px;
-      height: 42px;
-      border-radius: 10px;
-    }
-
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      font-size: 0.95rem;
-      font-weight: 700;
-    }
-
-    .nav-links a {
-      color: var(--text);
-      text-decoration: none;
-    }
-
-    .nav-links a:hover {
-      color: var(--accent-dark);
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 160px;
-      align-items: center;
-      gap: 30px;
-      padding: 54px 0 44px;
-    }
-
-    .title-art {
-      width: min(390px, 100%);
-      margin-bottom: 18px;
-    }
-
-    h1,
-    h2,
-    h3 {
-      margin: 0;
-      line-height: 1.3;
-      letter-spacing: 0;
-    }
-
-    h1 {
-      margin-bottom: 14px;
-      font-size: clamp(2.2rem, 6vw, 3.8rem);
-    }
-
-    h2 {
-      font-size: clamp(1.45rem, 3.4vw, 2.1rem);
-    }
-
-    h3 {
-      font-size: 1.1rem;
-    }
-
-    p {
-      margin: 0;
-    }
-
-    ul,
-    ol {
-      margin: 0;
-      padding-left: 1.35rem;
-    }
-
-    li + li {
-      margin-top: 6px;
-    }
-
-    .lead {
-      max-width: 720px;
-      color: var(--muted);
-      font-size: 1.08rem;
-    }
-
-    .mascot {
-      justify-self: center;
-      width: 150px;
-    }
-
-    section {
-      padding: 36px 0;
-      border-top: 1px solid var(--line);
-    }
-
-    section:first-of-type {
-      border-top: 0;
-    }
-
-    .section-head {
-      margin-bottom: 22px;
-    }
-
-    .section-head p {
-      margin-top: 10px;
-      color: var(--muted);
-    }
-
-    .note {
-      margin-top: 18px;
-      padding: 18px 20px;
-      border-left: 5px solid var(--support);
-      border-radius: 8px;
-      background: #eefafa;
-    }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .step-card {
-      overflow: hidden;
-      min-width: 0;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      background: var(--surface);
-      box-shadow: var(--shadow);
-    }
-
-    .step-image {
-      display: grid;
-      place-items: center;
-      min-height: 220px;
-      padding: 16px;
-      background: #f4f4f7;
-    }
-
-    .step-image img {
-      width: 100%;
-      max-height: 360px;
-      object-fit: contain;
-    }
-
-    .step-body {
-      padding: 18px;
-    }
-
-    .step-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 30px;
-      height: 30px;
-      margin-bottom: 10px;
-      border-radius: 999px;
-      background: var(--accent);
-      color: #ffffff;
-      font-weight: 800;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .panel {
-      padding: 20px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--surface);
-    }
-
-    .panel p,
-    .panel ul {
-      margin-top: 10px;
-      color: var(--muted);
-    }
-
-    .button-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 18px;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 48px;
-      padding: 11px 18px;
-      border: 1px solid var(--support);
-      border-radius: 8px;
-      background: var(--support);
-      color: #ffffff;
-      font-weight: 800;
-      text-decoration: none;
-    }
-
-    .button:hover {
-      border-color: var(--support-dark);
-      background: var(--support-dark);
-      color: #ffffff;
-    }
-
-    .button.secondary {
-      border-color: var(--line);
-      background: var(--surface);
-      color: var(--support);
-    }
-
-    .button.secondary:hover {
-      border-color: var(--support);
-      background: #f7fffd;
-      color: var(--support-dark);
-    }
-
-    .meta {
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .footer {
-      margin-top: 20px;
-      background: #33231a;
-      color: #fff8ef;
-    }
-
-    .footer-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      width: min(980px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 32px 0;
-    }
-
-    .footer a {
-      color: #ffffff;
-    }
-
-    @media (max-width: 760px) {
-      .nav {
-        align-items: flex-start;
-        flex-direction: column;
-        min-height: auto;
-        padding: 12px 0;
+  <script>
+    (() => {
+      let language;
+      try {
+        language = localStorage.getItem('hamu-mask-language');
+      } catch (_) {}
+      if (language !== 'ja' && language !== 'en') {
+        language = (navigator.languages || [navigator.language]).some((value) => value.toLowerCase().startsWith('ja')) ? 'ja' : 'en';
       }
-
-      .nav-links {
-        gap: 14px;
-      }
-
-      .hero,
-      .steps,
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        padding-top: 38px;
-      }
-
-      .mascot {
-        justify-self: start;
-        width: 110px;
-      }
-
-      .step-image {
-        min-height: 170px;
-      }
-
-      .step-image img {
-        max-height: 300px;
-      }
-
-      .footer-inner {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-    }
-  </style>
+      document.documentElement.lang = language;
+    })();
+  </script>
+  <link rel="stylesheet" href="../style.css">
 </head>
-<body>
+<body class="page-support">
   <header class="site-header">
-    <nav class="nav" aria-label="メインナビゲーション">
+    <nav class="nav" aria-label="メインナビゲーション" data-ja-aria-label="メインナビゲーション" data-en-aria-label="Main navigation">
       <a class="brand" href="../">
         <img src="../../assets/hamu-icon-64.png" alt="" width="64" height="64">
-        <span>はむマスク</span>
+        <span data-ja="はむマスク" data-en="Hamu Mask">はむマスク</span>
       </a>
-      <div class="nav-links">
-        <a href="#setup">設定手順</a>
-        <a href="#trouble">トラブル</a>
-        <a href="#report">不具合報告</a>
-        <a href="#privacy">プライバシー</a>
+      <div class="nav-tools">
+        <div class="nav-links">
+          <a href="#setup" data-ja="設定手順" data-en="Setup">設定手順</a>
+          <a href="#trouble" data-ja="トラブル" data-en="Troubleshooting">トラブル</a>
+          <a href="#report" data-ja="不具合報告" data-en="Report an issue">不具合報告</a>
+          <a href="#privacy" data-ja="プライバシー" data-en="Privacy">プライバシー</a>
+        </div>
+        <div class="language-switcher" role="group" aria-label="言語を選択" data-ja-aria-label="言語を選択" data-en-aria-label="Select language">
+          <button class="language-button" type="button" data-language="ja" aria-pressed="true">日本語</button>
+          <button class="language-button" type="button" data-language="en" aria-pressed="false">English</button>
+        </div>
       </div>
     </nav>
     <div class="nav hero">
       <div>
-        <img class="title-art" src="../../assets/hamu-title-256.png" alt="はむマスク" width="600" height="148">
-        <h1>はむマスク サポート</h1>
-        <p class="lead">iOS Safari拡張機能「はむマスク」の設定方法、困ったときの確認事項、不具合報告方法をまとめています。</p>
+        <img class="title-art" src="../../assets/hamu-title-256.png" alt="はむマスク" data-ja-alt="はむマスク" data-en-alt="Hamu Mask" width="600" height="148">
+        <h1 data-ja="はむマスク サポート" data-en="Hamu Mask Support">はむマスク サポート</h1>
+        <p class="lead" data-ja="iOS Safari拡張機能「はむマスク」の設定方法、困ったときの確認事項、不具合報告方法をまとめています。" data-en="Setup instructions, troubleshooting tips, and issue reporting information for the Hamu Mask extension for iOS Safari.">iOS Safari拡張機能「はむマスク」の設定方法、困ったときの確認事項、不具合報告方法をまとめています。</p>
       </div>
       <img class="mascot" src="../../assets/hamster101-256.png" alt="" width="298" height="298">
     </div>
@@ -391,98 +53,98 @@
   <main>
     <section id="overview" aria-labelledby="overview-title">
       <div class="section-head">
-        <h2 id="overview-title">概要</h2>
-        <p>はむマスクは、iOS Safariに表示される広告候補領域を検出し、かわいいハムスター画像で視覚的にマスクするSafari拡張機能です。</p>
+        <h2 id="overview-title" data-ja="概要" data-en="Overview">概要</h2>
+        <p data-ja="はむマスクは、iOS Safariに表示される広告候補領域を検出し、かわいいハムスター画像で視覚的にマスクするSafari拡張機能です。" data-en="Hamu Mask is a Safari extension that detects potential ad areas in iOS Safari and visually covers them with cute hamster images.">はむマスクは、iOS Safariに表示される広告候補領域を検出し、かわいいハムスター画像で視覚的にマスクするSafari拡張機能です。</p>
       </div>
       <div class="note">
-        <p>この拡張機能は、通信を遮断する広告ブロッカーではありません。ページ上に表示された広告候補領域を視覚的にマスクします。</p>
+        <p data-ja="この拡張機能は、通信を遮断する広告ブロッカーではありません。ページ上に表示された広告候補領域を視覚的にマスクします。" data-en="This extension is not an ad blocker that blocks network requests. It visually covers potential ad areas displayed on the page.">この拡張機能は、通信を遮断する広告ブロッカーではありません。ページ上に表示された広告候補領域を視覚的にマスクします。</p>
       </div>
     </section>
 
     <section id="setup" aria-labelledby="setup-title">
       <div class="section-head">
-        <h2 id="setup-title">Safari拡張の設定手順</h2>
-        <p>iOSの仕様上、アプリをインストールしただけではSafari側で自動有効化されません。以下の流れで、はむマスクとWebサイトへのアクセスを許可してください。</p>
+        <h2 id="setup-title" data-ja="Safari拡張の設定手順" data-en="Set up the Safari extension">Safari拡張の設定手順</h2>
+        <p data-ja="iOSの仕様上、アプリをインストールしただけではSafari側で自動有効化されません。以下の流れで、はむマスクとWebサイトへのアクセスを許可してください。" data-en="iOS does not automatically enable Safari extensions after installation. Follow these steps to allow Hamu Mask and grant it access to websites.">iOSの仕様上、アプリをインストールしただけではSafari側で自動有効化されません。以下の流れで、はむマスクとWebサイトへのアクセスを許可してください。</p>
       </div>
       <div class="steps">
         <article class="step-card">
           <div class="step-image">
-            <img src="../assets/setup/step-01-256.png" alt="設定アプリのアイコン">
+            <img src="../assets/setup/step-01-256.png" alt="設定アプリのアイコン" data-ja-alt="設定アプリのアイコン" data-en-alt="Settings app icon">
           </div>
           <div class="step-body">
             <span class="step-number">1</span>
-            <h3>iPhoneの設定を開く</h3>
-            <p>ホーム画面から「設定」を開きます。</p>
+            <h3 data-ja="iPhoneの設定を開く" data-en="Open iPhone Settings">iPhoneの設定を開く</h3>
+            <p data-ja="ホーム画面から「設定」を開きます。" data-en="Open Settings from the Home Screen.">ホーム画面から「設定」を開きます。</p>
           </div>
         </article>
         <article class="step-card">
           <div class="step-image">
-            <img src="../assets/setup/step-02-256.png" alt="設定内のアプリ項目" >
+            <img src="../assets/setup/step-02-256.png" alt="設定内のアプリ項目" data-ja-alt="設定内のアプリ項目" data-en-alt="Apps item in Settings">
           </div>
           <div class="step-body">
             <span class="step-number">2</span>
-            <h3>アプリへ進む</h3>
-            <p>設定の中にある「アプリ」をタップします。</p>
+            <h3 data-ja="アプリへ進む" data-en="Go to Apps">アプリへ進む</h3>
+            <p data-ja="設定の中にある「アプリ」をタップします。" data-en="Tap “Apps” in Settings.">設定の中にある「アプリ」をタップします。</p>
           </div>
         </article>
         <article class="step-card">
           <div class="step-image">
-            <img src="../assets/setup/step-03-256.png" alt="アプリ一覧内のSafari項目" >
+            <img src="../assets/setup/step-03-256.png" alt="アプリ一覧内のSafari項目" data-ja-alt="アプリ一覧内のSafari項目" data-en-alt="Safari in the Apps list">
           </div>
           <div class="step-body">
             <span class="step-number">3</span>
-            <h3>Safariへ進む</h3>
-            <p>アプリ一覧から「Safari」をタップします。</p>
+            <h3 data-ja="Safariへ進む" data-en="Go to Safari">Safariへ進む</h3>
+            <p data-ja="アプリ一覧から「Safari」をタップします。" data-en="Tap “Safari” in the Apps list.">アプリ一覧から「Safari」をタップします。</p>
           </div>
         </article>
         <article class="step-card">
           <div class="step-image">
-            <img src="../assets/setup/step-04-256.png" alt="Safari設定内の機能拡張項目" >
+            <img src="../assets/setup/step-04-256.png" alt="Safari設定内の機能拡張項目" data-ja-alt="Safari設定内の機能拡張項目" data-en-alt="Extensions item in Safari settings">
           </div>
           <div class="step-body">
             <span class="step-number">4</span>
-            <h3>機能拡張を開く</h3>
-            <p>Safariの設定にある「機能拡張」をタップします。</p>
+            <h3 data-ja="機能拡張を開く" data-en="Open Extensions">機能拡張を開く</h3>
+            <p data-ja="Safariの設定にある「機能拡張」をタップします。" data-en="Tap “Extensions” in Safari settings.">Safariの設定にある「機能拡張」をタップします。</p>
           </div>
         </article>
         <article class="step-card">
           <div class="step-image">
-            <img src="../assets/setup/step-05-256.png" alt="機能拡張一覧内のはむマスク項目" >
+            <img src="../assets/setup/step-05-256.png" alt="機能拡張一覧内のはむマスク項目" data-ja-alt="機能拡張一覧内のはむマスク項目" data-en-alt="Hamu Mask in the Extensions list">
           </div>
           <div class="step-body">
             <span class="step-number">5</span>
-            <h3>はむマスクを選ぶ</h3>
-            <p>機能拡張の一覧から「はむマスク」をタップします。</p>
+            <h3 data-ja="はむマスクを選ぶ" data-en="Select Hamu Mask">はむマスクを選ぶ</h3>
+            <p data-ja="機能拡張の一覧から「はむマスク」をタップします。" data-en="Tap “Hamu Mask” in the Extensions list.">機能拡張の一覧から「はむマスク」をタップします。</p>
           </div>
         </article>
         <article class="step-card">
           <div class="step-image">
-            <img src="../assets/setup/step-06-256.png" alt="はむマスクの拡張機能許可スイッチ" >
+            <img src="../assets/setup/step-06-256.png" alt="はむマスクの拡張機能許可スイッチ" data-ja-alt="はむマスクの拡張機能許可スイッチ" data-en-alt="Allow Extension switch for Hamu Mask">
           </div>
           <div class="step-body">
             <span class="step-number">6</span>
-            <h3>拡張機能を許可する</h3>
-            <p>はむマスクの設定で「拡張機能を許可」と「プライベートブラウズで許可」をオンにします。</p>
+            <h3 data-ja="拡張機能を許可する" data-en="Allow the extension">拡張機能を許可する</h3>
+            <p data-ja="はむマスクの設定で「拡張機能を許可」と「プライベートブラウズで許可」をオンにします。" data-en="Turn on “Allow Extension” and “Allow in Private Browsing” in the Hamu Mask settings.">はむマスクの設定で「拡張機能を許可」と「プライベートブラウズで許可」をオンにします。</p>
           </div>
         </article>
         <article class="step-card">
           <div class="step-image">
-            <img src="../assets/setup/step-07-256.png" alt="はむマスクのアクセス権設定" >
+            <img src="../assets/setup/step-07-256.png" alt="はむマスクのアクセス権設定" data-ja-alt="はむマスクのアクセス権設定" data-en-alt="Website permissions for Hamu Mask">
           </div>
           <div class="step-body">
             <span class="step-number">7</span>
-            <h3>すべてのWebサイトを開く</h3>
-            <p>アクセス権設定にある「すべてのWebサイト」をタップします。</p>
+            <h3 data-ja="すべてのWebサイトを開く" data-en="Open All Websites">すべてのWebサイトを開く</h3>
+            <p data-ja="アクセス権設定にある「すべてのWebサイト」をタップします。" data-en="Tap “All Websites” under Permissions.">アクセス権設定にある「すべてのWebサイト」をタップします。</p>
           </div>
         </article>
         <article class="step-card">
           <div class="step-image">
-            <img src="../assets/setup/step-08-256.png" alt="すべてのWebサイトが許可になっている画面" >
+            <img src="../assets/setup/step-08-256.png" alt="すべてのWebサイトが許可になっている画面" data-ja-alt="すべてのWebサイトが許可になっている画面" data-en-alt="All Websites set to Allow">
           </div>
           <div class="step-body">
             <span class="step-number">8</span>
-            <h3>確認状態を変更する</h3>
-            <p>デフォルトでは「確認」になっているため、「許可」をタップします。</p>
+            <h3 data-ja="確認状態を変更する" data-en="Change the permission">確認状態を変更する</h3>
+            <p data-ja="デフォルトでは「確認」になっているため、「許可」をタップします。" data-en="The default is “Ask.” Tap “Allow” to change it.">デフォルトでは「確認」になっているため、「許可」をタップします。</p>
           </div>
         </article>
       </div>
@@ -490,84 +152,129 @@
 
     <section id="trouble" aria-labelledby="trouble-title">
       <div class="section-head">
-        <h2 id="trouble-title">よくあるトラブル</h2>
-        <p>期待通りに動かない場合は、以下を確認してください。</p>
+        <h2 id="trouble-title" data-ja="よくあるトラブル" data-en="Troubleshooting">よくあるトラブル</h2>
+        <p data-ja="期待通りに動かない場合は、以下を確認してください。" data-en="If Hamu Mask is not working as expected, check the following.">期待通りに動かない場合は、以下を確認してください。</p>
       </div>
       <div class="grid">
         <article class="panel">
-          <h3>マスクが表示されない</h3>
+          <h3 data-ja="マスクが表示されない" data-en="Masks do not appear">マスクが表示されない</h3>
           <ul>
-            <li>Safariの機能拡張で、はむマスクが許可されているか確認してください。</li>
-            <li>「すべてのWebサイト」が「許可」になっているか確認してください。</li>
-            <li>ページを再読み込みしてください。</li>
+            <li data-ja="Safariの機能拡張で、はむマスクが許可されているか確認してください。" data-en="Confirm that Hamu Mask is enabled in Safari Extensions.">Safariの機能拡張で、はむマスクが許可されているか確認してください。</li>
+            <li data-ja="「すべてのWebサイト」が「許可」になっているか確認してください。" data-en="Confirm that “All Websites” is set to “Allow.”">「すべてのWebサイト」が「許可」になっているか確認してください。</li>
+            <li data-ja="ページを再読み込みしてください。" data-en="Reload the page.">ページを再読み込みしてください。</li>
           </ul>
         </article>
         <article class="panel">
-          <h3>広告ではない場所がマスクされる</h3>
+          <h3 data-ja="広告ではない場所がマスクされる" data-en="A non-ad area is covered">広告ではない場所がマスクされる</h3>
           <ul>
-            <li>マスクの操作メニューから解除してください。</li>
-            <li>再現しやすいURLがある場合は、不具合として報告してください。</li>
+            <li data-ja="マスクの操作メニューから解除してください。" data-en="Remove the mask from its action menu.">マスクの操作メニューから解除してください。</li>
+            <li data-ja="再現しやすいURLがある場合は、不具合として報告してください。" data-en="If you have a URL where the problem can be reproduced, please report it as an issue.">再現しやすいURLがある場合は、不具合として報告してください。</li>
           </ul>
         </article>
         <article class="panel">
-          <h3>一部の広告が残る</h3>
-          <p>サイト構造や広告配信方法によって、すべての広告候補を検出できない場合があります。</p>
+          <h3 data-ja="一部の広告が残る" data-en="Some ads remain visible">一部の広告が残る</h3>
+          <p data-ja="サイト構造や広告配信方法によって、すべての広告候補を検出できない場合があります。" data-en="Depending on the site's structure and ad delivery method, Hamu Mask may not detect every potential ad.">サイト構造や広告配信方法によって、すべての広告候補を検出できない場合があります。</p>
         </article>
         <article class="panel">
-          <h3>プライベートブラウズで使いたい</h3>
-          <p>必要に応じて、はむマスクの設定で「プライベートブラウズで許可」もオンにしてください。</p>
+          <h3 data-ja="プライベートブラウズで使いたい" data-en="Use in Private Browsing">プライベートブラウズで使いたい</h3>
+          <p data-ja="必要に応じて、はむマスクの設定で「プライベートブラウズで許可」もオンにしてください。" data-en="Turn on “Allow in Private Browsing” in the Hamu Mask settings when needed.">必要に応じて、はむマスクの設定で「プライベートブラウズで許可」もオンにしてください。</p>
         </article>
       </div>
     </section>
 
     <section id="report" aria-labelledby="report-title">
       <div class="section-head">
-        <h2 id="report-title">不具合報告</h2>
-        <p>不具合、誤検出、マスクされない広告候補がある場合は、GitHub Issuesで報告してください。</p>
+        <h2 id="report-title" data-ja="不具合報告" data-en="Report an issue">不具合報告</h2>
+        <p data-ja="不具合、誤検出、マスクされない広告候補がある場合は、GitHub Issuesで報告してください。" data-en="Please report bugs, incorrect detections, or potential ads that are not covered through GitHub Issues.">不具合、誤検出、マスクされない広告候補がある場合は、GitHub Issuesで報告してください。</p>
       </div>
       <div class="panel">
-        <h3>報告時にあると確認しやすい情報</h3>
+        <h3 data-ja="報告時にあると確認しやすい情報" data-en="Helpful information to include">報告時にあると確認しやすい情報</h3>
         <ul>
-          <li>発生したページのURL</li>
-          <li>iOSのバージョン</li>
-          <li>はむマスクのバージョン</li>
-          <li>再現手順</li>
-          <li>期待した結果</li>
-          <li>実際の結果</li>
+          <li data-ja="発生したページのURL" data-en="URL of the affected page">発生したページのURL</li>
+          <li data-ja="iOSのバージョン" data-en="iOS version">iOSのバージョン</li>
+          <li data-ja="はむマスクのバージョン" data-en="Hamu Mask version">はむマスクのバージョン</li>
+          <li data-ja="再現手順" data-en="Steps to reproduce">再現手順</li>
+          <li data-ja="期待した結果" data-en="Expected result">期待した結果</li>
+          <li data-ja="実際の結果" data-en="Actual result">実際の結果</li>
         </ul>
         <div class="button-row">
-          <a class="button" href="https://github.com/route250/HamuMask-iOS/issues">GitHub Issuesを開く</a>
+          <a class="button" href="https://github.com/route250/HamuMask-iOS/issues" data-ja="GitHub Issuesを開く" data-en="Open GitHub Issues">GitHub Issuesを開く</a>
         </div>
       </div>
     </section>
 
     <section id="privacy" aria-labelledby="privacy-title">
       <div class="section-head">
-        <h2 id="privacy-title">プライバシー</h2>
-        <p>はむマスクは、広告候補を判定するために閲覧中のWebページのDOM構造、要素の属性、URL、表示サイズ、表示位置などをブラウザ内で参照します。</p>
+        <h2 id="privacy-title" data-ja="プライバシー" data-en="Privacy">プライバシー</h2>
+        <p data-ja="はむマスクは、広告候補を判定するために閲覧中のWebページのDOM構造、要素の属性、URL、表示サイズ、表示位置などをブラウザ内で参照します。" data-en="To identify potential ads, Hamu Mask examines the current page's DOM structure, element attributes, URLs, display sizes, positions, and related information within the browser.">はむマスクは、広告候補を判定するために閲覧中のWebページのDOM構造、要素の属性、URL、表示サイズ、表示位置などをブラウザ内で参照します。</p>
       </div>
       <div class="panel">
         <ul>
-          <li>閲覧ページの内容、URL、個人情報、閲覧履歴、広告候補の判定結果を外部サーバーへ送信しません。</li>
-          <li>広告候補の判定処理はブラウザ内で完結します。</li>
-          <li>現状の実装では、閲覧ページの情報や個人情報を永続保存しません。</li>
-          <li>外部サーバーから取得したJavaScriptコードを実行しません。</li>
+          <li data-ja="閲覧ページの内容、URL、個人情報、閲覧履歴、広告候補の判定結果を外部サーバーへ送信しません。" data-en="Page content, URLs, personal information, browsing history, and detection results are not sent to external servers.">閲覧ページの内容、URL、個人情報、閲覧履歴、広告候補の判定結果を外部サーバーへ送信しません。</li>
+          <li data-ja="広告候補の判定処理はブラウザ内で完結します。" data-en="Potential ad detection is performed entirely within the browser.">広告候補の判定処理はブラウザ内で完結します。</li>
+          <li data-ja="現状の実装では、閲覧ページの情報や個人情報を永続保存しません。" data-en="The current implementation does not persist page information or personal information.">現状の実装では、閲覧ページの情報や個人情報を永続保存しません。</li>
+          <li data-ja="外部サーバーから取得したJavaScriptコードを実行しません。" data-en="Hamu Mask does not execute JavaScript code retrieved from external servers.">外部サーバーから取得したJavaScriptコードを実行しません。</li>
         </ul>
       </div>
     </section>
 
     <section aria-labelledby="pages-title">
       <div class="button-row">
-        <a class="button secondary" href="../">戻る</a>
+        <a class="button secondary" href="../" data-ja="戻る" data-en="Back">戻る</a>
       </div>
     </section>
   </main>
 
   <footer class="footer">
     <div class="footer-inner">
-      <p>はむマスク for iOS Safari</p>
-      <p><a href="../">はむマスク for iOS Safari</a></p>
+      <p data-ja="はむマスク for iOS Safari" data-en="Hamu Mask for iOS Safari">はむマスク for iOS Safari</p>
+      <p><a href="../" data-ja="はむマスク for iOS Safari" data-en="Hamu Mask for iOS Safari">はむマスク for iOS Safari</a></p>
     </div>
   </footer>
+  <script>
+    (() => {
+      const pageMetadata = {
+        ja: {
+          title: 'はむマスク サポート',
+          description: 'はむマスク for iOS Safari のサポートページです。設定手順、よくあるトラブル、プライバシー、不具合報告方法を掲載しています。'
+        },
+        en: {
+          title: 'Hamu Mask Support',
+          description: 'Support for Hamu Mask for iOS Safari, including setup instructions, troubleshooting, privacy information, and issue reporting.'
+        }
+      };
+
+      const setLanguage = (language, save = false) => {
+        const selected = language === 'ja' ? 'ja' : 'en';
+        document.documentElement.lang = selected;
+        document.title = pageMetadata[selected].title;
+        document.querySelector('meta[name="description"]').content = pageMetadata[selected].description;
+
+        document.querySelectorAll('[data-ja][data-en]').forEach((element) => {
+          element.textContent = element.dataset[selected];
+        });
+        ['aria-label', 'alt'].forEach((attribute) => {
+          document.querySelectorAll(`[data-ja-${attribute}][data-en-${attribute}]`).forEach((element) => {
+            const dataKey = selected + attribute.split('-').map((part) => part[0].toUpperCase() + part.slice(1)).join('');
+            element.setAttribute(attribute, element.dataset[dataKey]);
+          });
+        });
+        document.querySelectorAll('[data-language]').forEach((button) => {
+          button.setAttribute('aria-pressed', String(button.dataset.language === selected));
+        });
+
+        if (save) {
+          try {
+            localStorage.setItem('hamu-mask-language', selected);
+          } catch (_) {}
+        }
+      };
+
+      document.querySelectorAll('[data-language]').forEach((button) => {
+        button.addEventListener('click', () => setLanguage(button.dataset.language, true));
+      });
+      setLanguage(document.documentElement.lang);
+    })();
+  </script>
 </body>
 </html>
