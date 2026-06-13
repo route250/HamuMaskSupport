@@ -46,7 +46,7 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-inner">
         <div>
-          <img class="title-art" src="../assets/hamu-title-256.png" alt="はむマスク" data-ja-alt="はむマスク" data-en-alt="Hamu Mask" width="600" height="148">
+          <img class="title-art" src="../assets/hamu-title-ja-1203x297.png" data-ja-src="../assets/hamu-title-ja-1203x297.png" data-en-src="../assets/hamu-title-en-800x198.png" data-ja-width="1203" data-en-width="800" data-ja-height="297" data-en-height="198" alt="はむマスク" data-ja-alt="はむマスク" data-en-alt="Hamu Mask" width="1203" height="297">
           <h1 id="hero-title" class="visually-hidden" data-ja="はむマスク" data-en="Hamu Mask">はむマスク</h1>
           <p class="lead" data-ja="Safariの広告枠を、かわいいハムスターでマスク。iPhoneのSafariで広告を検出し視覚的に隠します。" data-en="Cover ad spaces in Safari with cute hamsters. Hamu Mask detects ads in Safari on iPhone and visually hides them.">Safariの広告枠を、かわいいハムスターでマスク。iPhoneのSafariで広告を検出し視覚的に隠します。</p>
           <div class="hero-actions">
@@ -58,7 +58,7 @@
           </div>
         </div>
         <div class="hero-visual" aria-hidden="true">
-          <img src="./assets/image100-small.png" alt="" width="600" height="1299">
+          <img src="./assets/promote-01-ja-600x1299.png" data-ja-src="./assets/promote-01-ja-600x1299.png" data-en-src="./assets/promote-01-en-600x1297.png" data-ja-height="1299" data-en-height="1297" alt="" width="600" height="1299">
         </div>
       </div>
     </section>
@@ -113,13 +113,13 @@
         </div>
       </div>
       <div class="visual-card">
-        <img src="./assets/image101-small.png" alt="はむマスクが広告候補を検出してハムスター画像でマスクする説明画像" data-ja-alt="はむマスクが広告候補を検出してハムスター画像でマスクする説明画像" data-en-alt="Illustration showing Hamu Mask detecting and covering a potential ad with a hamster image" width="600" height="1299">
+        <img src="./assets/promote-02-ja-600x1299.png" data-ja-src="./assets/promote-02-ja-600x1299.png" data-en-src="./assets/promote-02-en-600x1291.png" data-ja-height="1299" data-en-height="1291" alt="はむマスクが広告候補を検出してハムスター画像でマスクする説明画像" data-ja-alt="はむマスクが広告候補を検出してハムスター画像でマスクする説明画像" data-en-alt="Illustration showing Hamu Mask detecting and covering a potential ad with a hamster image" width="600" height="1299">
       </div>
     </section>
 
     <section class="section split reverse" aria-labelledby="unmask-title">
       <div class="visual-card">
-        <img src="./assets/image103-small.png" alt="タップしたい広告はマスクを解除して確認できる説明画像" data-ja-alt="タップしたい広告はマスクを解除して確認できる説明画像" data-en-alt="Illustration showing that a mask can be removed to view or tap an ad" width="600" height="1299">
+        <img src="./assets/promote-03-ja-600x1299.png" data-ja-src="./assets/promote-03-ja-600x1299.png" data-en-src="./assets/promote-03-en-600x1300.png" data-ja-height="1299" data-en-height="1300" alt="タップしたい広告はマスクを解除して確認できる説明画像" data-ja-alt="タップしたい広告はマスクを解除して確認できる説明画像" data-en-alt="Illustration showing that a mask can be removed to view or tap an ad" width="600" height="1299">
       </div>
       <div>
         <h2 id="unmask-title" data-ja="誤検出でも戻せる" data-en="Undo incorrect detections">誤検出でも戻せる</h2>
@@ -178,6 +178,13 @@
             const dataKey = selected + attribute.split('-').map((part) => part[0].toUpperCase() + part.slice(1)).join('');
             element.setAttribute(attribute, element.dataset[dataKey]);
           });
+        });
+        document.querySelectorAll('[data-ja-src][data-en-src]').forEach((image) => {
+          image.src = image.dataset[selected + 'Src'];
+          const width = image.dataset[selected + 'Width'];
+          const height = image.dataset[selected + 'Height'];
+          if (width) image.width = Number(width);
+          if (height) image.height = Number(height);
         });
         document.querySelectorAll('[data-language]').forEach((button) => {
           button.setAttribute('aria-pressed', String(button.dataset.language === selected));
